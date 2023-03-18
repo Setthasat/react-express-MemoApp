@@ -29,6 +29,8 @@ class Form {
             return res.json(BaseResponseInst.buildResponse()).status(400);
         };
 
+        console.log("pass vilidate");
+
         const item = new this.Model({
             title: title,
             description: description,
@@ -42,8 +44,26 @@ class Form {
             BaseResponseInst.setValue(400, "something went worng !", null);
             return res.json(BaseResponseInst.buildResponse()).status(400);
         }
+    };
 
-
+    deleteData = async (req, res) => {
+        const BaseResponseInst = new BaseResponse();
+        const { id } = req.params;
+        // validate
+        if (!id) {
+            BaseResponseInst.setValue(400, "id not found", null);
+            return res.json(BaseResponseInst.buildResponse()).status(400);
+        }
+        // datababse
+        try {
+            await this.Model.findByIdAndDelete({ _id: id });
+            BaseResponseInst.setValue(204, "delete success", null);
+            return res.json(BaseResponseInst.buildResponse()).status(204);
+        } catch (err) {
+            console.log("something went worng", err);
+            BaseResponseInst.setValue(400, "somethingwent worng", null);
+            return res.json(BaseResponseInst.buildResponse()).status(400);
+        };
 
     };
 }
@@ -56,8 +76,6 @@ class BaseResponse {
         this.code = code;
         this.description = description;
         this.data = data;
-
-        console.log('running on constructor');
     }
 
     buildResponse() {

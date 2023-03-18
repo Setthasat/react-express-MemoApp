@@ -8,12 +8,12 @@ const Form = require('./controller/form');
 
 const PORT = process.env.PORT || 8888;
 
-dotenv.config()
+dotenv.config();
 app.use(cors());
 app.use(express.json());
 
 try {
-    
+
     // set("strictQuery", true);
     mongoose.connect(process.env.DB_URL);
     console.log('database connected ...');
@@ -23,7 +23,11 @@ try {
 
 const FormInst = new Form(Model);
 app.get('/api/Forms', FormInst.getAllData);
-app.post('/api/create', FormInst.createForm);
+app.post('/api/create/form', FormInst.createForm);
+app.delete('/api/delete/:id', FormInst.deleteData)
+//patch
+//findbyid
+
 
 
 app.listen(PORT, console.log(`app running at http://localhost:${PORT}`));
