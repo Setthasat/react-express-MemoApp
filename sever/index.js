@@ -21,7 +21,8 @@ try {
 }
 
 const FormInst = new Form(Model);
-app.get('/api/todos', FormInst.getAllData);
+app.get('/api/Forms', FormInst.getAllData);
+app.post('/api/create', FormInst.createForm);
 
 
 app.listen(PORT, console.log(`app running at http://localhost:${PORT}`));
