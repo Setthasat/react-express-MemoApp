@@ -8,13 +8,14 @@ const Form = require('./controller/form');
 
 const PORT = process.env.PORT || 8888;
 
+dotenv.config()
 app.use(cors());
 app.use(express.json());
 
 try {
-    const DBAddress = process.env.DB_URL || "localhost:8888";
+    
     // set("strictQuery", true);
-    mongoose.connect(DBAddress);
+    mongoose.connect(process.env.DB_URL);
     console.log('database connected ...');
 } catch (err) {
     console.log(err);
