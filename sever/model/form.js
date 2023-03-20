@@ -1,20 +1,24 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const FormsSchema = new mongoose.Schema({
-    title : {
+    title: {
         type: String,
         require: true,
     },
-    description : {
+    description: {
         type: String,
         require: true
     },
-    date : {
+    date: {
         type: String,
         require: true
     },
+    isComplete: {
+        type: Boolean,
+        require: false
+    }
 });
 
-const FormsModel = mongoose.model("forms", FormsSchema)
+const FormsModel = mongoose.model("forms", FormsSchema);
 
 module.exports = FormsModel;

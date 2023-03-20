@@ -68,7 +68,7 @@ function forms({ setError, setMemo }) {
                             name='date'
                             value={form.date}
                             onChange={onChangeInput}
-                            className='pl-2 h-[3rem] focus:outline-none'
+                            className='pl-2 h-[3rem] focus:outline-none p-2'
                         />
                         {/* <p className='text-[1.5rem] flex justify-center items-center h-auto text-white'>Title</p> */}
                         <input

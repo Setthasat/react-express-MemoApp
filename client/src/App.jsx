@@ -9,17 +9,13 @@ import Blog from './pages/Blog';
 
 function App() {
 
-  const [memo, setMemo] = useState([]);
-
-  // const memo = useStore((state) => state.memo);
-
   return (
-    <div className="bg-slate-500 h-screen">
+    <div className="bg-slate-500 h-auto max-w-full">
       <Navbar />
       <Routes>
         <Route index element={<Home />} />
         <Route path="blog" element={<Blog />} />
-        <Route path="forms" element={<MemoForms setMemo={setMemo} />} />
+        <Route path="forms" element={<MemoForms />} />
         <Route plath="*" element={<Nopage />} />
       </Routes>
     </div>

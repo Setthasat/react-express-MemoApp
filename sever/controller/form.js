@@ -49,6 +49,7 @@ class Form {
     findFormByID = async (req, res) => {
         const BaseResponseInst = new BaseResponse();
         const { id } = req.params;
+        console.log(id);
         try {
             const form = await this.Model.findById({ _id: id });
             BaseResponseInst.setValue(200, "success", form);
