@@ -46,6 +46,20 @@ class Form {
         }
     };
 
+    findFormByID = async (req, res) => {
+        const BaseResponseInst = new BaseResponse();
+        const { id } = req.params;
+        try {
+            const form = await this.Model.findById({ _id: id });
+            BaseResponseInst.setValue(200, "success", form);
+            return res.json(BaseResponseInst.buildResponse()).status(200);
+        } catch (err) {
+            console.log("something went worng", err);
+            BaseResponseInst.setValue(400, "somethingwent worng", null);
+            return res.json(BaseResponseInst.buildResponse()).status(400);
+        }
+    };
+
     deleteData = async (req, res) => {
         const BaseResponseInst = new BaseResponse();
         const { id } = req.params;

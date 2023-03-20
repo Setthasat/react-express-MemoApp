@@ -24,8 +24,11 @@ try {
 const FormInst = new Form(Model);
 app.get('/api/Forms', FormInst.getAllData);
 app.post('/api/create/form', FormInst.createForm);
-app.delete('/api/delete/:id', FormInst.deleteData)
-//patch
+app.delete('/api/delete/:id', FormInst.deleteData);
+//findbyid
+app.get('/api/Forms/:id', FormInst.findFormByID);
+
+//patch complete, modify forms
 //findbyid
 
 
