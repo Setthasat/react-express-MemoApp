@@ -22,14 +22,17 @@ try {
 }
 
 const FormInst = new Form(Model);
+
+//get all forms
 app.get('/api/Forms', FormInst.getAllData);
-app.post('/api/create/form', FormInst.createForm);
-app.delete('/api/delete/:id', FormInst.deleteData);
-//findbyid
+// get form by id
 app.get('/api/Forms/:id', FormInst.findFormByID);
+// create form
+app.post('/api/create/form', FormInst.createForm);
+// delete form by id
+app.delete('/api/delete/:id', FormInst.deleteData);
 
 //patch complete, modify forms
-//findbyid
 
 
 
