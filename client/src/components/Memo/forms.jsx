@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import useStore from '../../store/store';
 import { GetDate } from '../../utils/index';
+import axios from 'axios';
 
 function forms({ setError, setMemo }) {
 
@@ -12,10 +13,9 @@ function forms({ setError, setMemo }) {
         id: uuidv4(),
         title: "",
         description: "",
-        date: ""
+        date: "",
+        isComplete: false
     });
-
-
 
     //moment().format("YYYY-MM-DD")
 
@@ -27,8 +27,9 @@ function forms({ setError, setMemo }) {
         }));
     };
 
-    const onSubmit = (event) => {
+    const handleOnSubmit = async (event) => {
         event.preventDefault();
+        console.log("helloS");
         let { id, title, description, date } = form;
 
         if (!date) {
@@ -39,29 +40,41 @@ function forms({ setError, setMemo }) {
             setError(true);
         }
 
-
+        const data = {
+            id: form.id,
+            title: form.title,
+            description: form.description,
+            date: form.date || GetDate(),
+            isComplete: form.isComplete
+        };
+        try {
+            const api = await axios.post("http://localhost:8888/api/create/form", data);
+            if (!api.data.data) {
+                console.log("something went worng");
+                return;
+            } else {
+                console.log(`create complete : ${api.data.data}`);
+            }
+        } catch (err) {
+            console.log(err);
+        }
         console.log(form);
 
         // addMemo(form);
-        setMemo(prev => [...prev, {
-            id: uuidv4(),
-            title: title,
-            description: description,
-            date: date || GetDate()``
-        }]);
 
         setForm(() => ({
             id: uuidv4(),
             title: "",
             description: "",
             date: "",
+            isComplete: false
         }));
     };
 
     return (
         <div className='flex justify-center items-center mt-[20rem] font-sans'>
             <div>
-                <form onSubmit={onSubmit}>
+                <form onSubmit={handleOnSubmit}>
                     <label className='flex gap-3'>
                         <input
                             type='date'
@@ -90,7 +103,7 @@ function forms({ setError, setMemo }) {
                         rows="6"
                         maxLength="999"
                     />
-                    <button >Submit</button>
+                    <button>Submit</button>
                 </form>
             </div>
         </div>

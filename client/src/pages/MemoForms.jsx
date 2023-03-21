@@ -5,14 +5,14 @@ import useStore from '../store/store';
 
 
 
-function MemoForms({setMemo}) {
+function MemoForms() {
 
     const [error, setError] = useState(false);
 
 
     return (
         <div>
-            <Memo setError={setError} setMemo={setMemo} />
+            <Memo setError={setError} />
             {error === true ? (
                 <ErrorPopUp setError={setError} />
             ) : (

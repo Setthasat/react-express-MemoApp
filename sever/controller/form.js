@@ -29,8 +29,6 @@ class Form {
             return res.json(BaseResponseInst.buildResponse()).status(400);
         };
 
-        console.log("pass vilidate");
-
         const item = new this.Model({
             title: title,
             description: description,
