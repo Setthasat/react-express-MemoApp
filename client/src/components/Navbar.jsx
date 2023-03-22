@@ -3,7 +3,7 @@ import { ClockLoader } from 'react-spinners';
 
 function Navbar() {
   return (
-    <div className='w-screen max-w-full h-[4rem] bg-slate-600 flex justify-between items-center'>
+    <div className='w-screen max-w-full h-[4rem] backdrop-blur-3xl shadow-2xl flex justify-between items-center'>
       <div className='sm:pl-6 pl-2 '>
         <div className='bg-white w-auto px-5 py-1 rounded-tl-3xl rounded-br-3xl'>
           <ClockLoader size={25} />

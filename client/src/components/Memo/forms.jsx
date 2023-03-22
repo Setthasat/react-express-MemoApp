@@ -70,7 +70,7 @@ function forms({ setError }) {
     };
 
     return (
-        <div className='flex justify-center items-center mt-[20rem] font-sans'>
+        <div className='flex justify-center items-center mt-[20rem] bg-gradient-to-r from-cyan-500 to-blue-500 font-sans'>
             <div>
                 <form onSubmit={handleOnSubmit}>
                     <label className='flex gap-3'>
@@ -79,7 +79,7 @@ function forms({ setError }) {
                             name='date'
                             value={form.date}
                             onChange={onChangeInput}
-                            className='pl-2 h-[3rem] focus:outline-none p-2'
+                            className='pl-2 h-[3rem] focus:outline-none p-2 text-white bg-transparent placeholder:text-gray-50 shadow-2xl backdrop-blur-3xl rounded-xl'
                         />
                         {/* <p className='text-[1.5rem] flex justify-center items-center h-auto text-white'>Title</p> */}
                         <input
@@ -88,11 +88,11 @@ function forms({ setError }) {
                             value={form.title}
                             onChange={onChangeInput}
                             placeholder='title . . .'
-                            className='px-2 h-[3rem] w-[25rem] focus:outline-none '
+                            className='px-2 h-[3rem] w-[25rem] focus:outline-none bg-transparent text-white placeholder:text-gray-50 shadow-2xl backdrop-blur-3xl rounded-xl'
                         />
                     </label>
                     <textarea
-                        className="block w-full px-2 py-2  bg-white focus:outline-none  border border-gray-400 mt-3 appearance-none overflow-auto"
+                        className="block w-full px-2 py-2 text-white placeholder:text-gray-50 bg-transparent shadow-2xl backdrop-blur-3xl focus:outline-none mt-3 appearance-none overflow-auto rounded-xl"
                         type="text"
                         name='description'
                         placeholder="description ..."

@@ -3,7 +3,7 @@ import SingleCard from './SingleCard';
 
 function Card({ apiData }) {
     return (
-        <div className='grid grid-cols-2'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2'>
             {apiData.map((items, index) => (
                 <div key={index}>
                     <SingleCard items={items} />

@@ -10,7 +10,7 @@ import Blog from './pages/Blog';
 function App() {
 
   return (
-    <div className="bg-slate-500 h-auto max-w-full">
+    <div className="bg-gradient-to-r from-cyan-500 to-blue-500 h-screen">
       <Navbar />
       <Routes>
         <Route index element={<Home />} />

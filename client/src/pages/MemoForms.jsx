@@ -11,7 +11,7 @@ function MemoForms() {
 
 
     return (
-        <div>
+        <div className=' bg-slate-500'>
             <Memo setError={setError} />
             {error === true ? (
                 <ErrorPopUp setError={setError} />
