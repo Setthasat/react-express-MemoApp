@@ -1,13 +1,11 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import useStore from '../../store/store';
 import { GetDate } from '../../utils/index';
 import axios from 'axios';
 
-function forms({ setError, setMemo }) {
+function forms({ setError }) {
 
-    const addMemo = useStore((state => state.addMemo));
 
     const [form, setForm] = useState({
         id: uuidv4(),
@@ -29,7 +27,6 @@ function forms({ setError, setMemo }) {
 
     const handleOnSubmit = async (event) => {
         event.preventDefault();
-        console.log("helloS");
         let { id, title, description, date } = form;
 
         if (!date) {
@@ -58,6 +55,7 @@ function forms({ setError, setMemo }) {
         } catch (err) {
             console.log(err);
         }
+        console.log(api.data.data);
         console.log(form);
 
         // addMemo(form);

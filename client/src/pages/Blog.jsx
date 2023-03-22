@@ -1,37 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from '../components/Blog/Card';
+import axios from 'axios';
 
 function Blog() {
 
-    const [mockForms, setMockForms] = useState([
-        {
-            id: 1,
-            title: "safe",
-            description: "hello world 1234`12312`31`321`321`312`312`233124234123414324362141234973412841235453124867567813245137265421384524587231546735214587128",
-            date: "22-02-2007"
-        },
-        {
-            id: 2,
-            title: "safe",
-            description: "hello world 1234",
-            date: "22-02-2007"
-        },
-        {
-            id: 3,
-            title: "safe",
-            description: "hello world 1234",
-            date: "22-02-2007"
-        },
-        {
-            id: 4,
-            title: "safe",
-            description: "hello world 1234",
-            date: "22-02-2007"
-        },
-    ]);
+    const [apiData, setApiData] = useState([]);
+
+    const fetch = async () => {
+        try {
+            const api = await axios.get("http://localhost:8888/api/Forms");
+            setApiData(api.data.data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    useEffect(() => {
+        fetch();
+    }, []);
     return (
         <div>
-            <Card mockForms={mockForms} />
+            <Card apiData={apiData}/>
         </div>
     );
 }
