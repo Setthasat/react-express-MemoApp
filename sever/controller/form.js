@@ -59,6 +59,25 @@ class Form {
         }
     };
 
+    setIsComplete = async (req, res) => {
+        const BaseResponseInst = new BaseResponse();
+        const { _id } = req.body;
+        if (!_id) {
+            BaseResponseInst.setValue(400, "invalid input", null);
+            return res.json(BaseResponseInst.buildResponse()).status(400);
+        }
+        try{
+            const form = await this.Model.findById(_id);
+            form.isComplete = !form.isComplete;
+            const NewForm = await form.save();
+            return res.json(BaseResponseInst.setValue(200, "update isComplete Success", NewForm)).status(201);
+        } catch (err) {
+            BaseResponseInst.setValue(400, "invalid input", null);
+            return res.json(BaseResponseInst.buildResponse()).status(400);
+        }
+        
+    };
+
     deleteData = async (req, res) => {
         const BaseResponseInst = new BaseResponse();
         const { id } = req.params;
@@ -67,7 +86,7 @@ class Form {
             BaseResponseInst.setValue(400, "id not found", null);
             return res.json(BaseResponseInst.buildResponse()).status(400);
         }
-        // datababse
+        // datababse  
         try {
             await this.Model.findByIdAndDelete({ _id: id });
             BaseResponseInst.setValue(204, "delete success", null);
