@@ -19,8 +19,8 @@ function Blog() {
         fetch();
     }, []);
     return (
-        <div>
-            <Card apiData={apiData}/>
+        <div className='h-auto bg-gradient-to-r from-cyan-500 to-blue-500'>
+            <Card apiData={apiData} />
         </div>
     );
 }
