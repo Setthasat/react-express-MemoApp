@@ -29,7 +29,8 @@ function forms({ setError }) {
 
     const handleOnSubmit = async (event) => {
         event.preventDefault();
-        let { id, title, description, date } = form;
+        console.log("hello");
+        let { title, description, date } = form;
 
         if (!date) {
             date = GetDate();
@@ -39,6 +40,8 @@ function forms({ setError }) {
             setError(true);
         }
 
+        console.log(form);
+
         const data = {
             id: form.id,
             title: form.title,
@@ -46,21 +49,6 @@ function forms({ setError }) {
             date: form.date || GetDate(),
             isComplete: form.isComplete
         };
-        try {
-            const api = await axios.post("http://localhost:8888/api/create/form", data);
-            if (!api.data.data) {
-                console.log("something went worng");
-                return;
-            } else {
-                console.log(`create complete : ${api.data.data}`);
-            }
-        } catch (err) {
-            console.log(err);
-        }
-        console.log(api.data.data);
-        console.log(form);
-
-        // addMemo(form);
 
         setForm(() => ({
             id: uuidv4(),
@@ -69,6 +57,19 @@ function forms({ setError }) {
             date: "",
             isComplete: false
         }));
+
+        try {
+            const api = await axios.post("http://localhost:8888/api/create/form", data);
+            if (!api.data.data) {
+                console.log("cannot get api");
+                return;
+            }
+            console.log(api.data.data);
+        } catch (err) {
+            console.log(err);
+        }
+
+
     };
 
     const handleComplete = (event) => {
@@ -77,7 +78,7 @@ function forms({ setError }) {
             ...prev,
             isComplete: !prev.isComplete
         }));
-        console.log(form.isComplete);
+        console.log(!form.isComplete);
     };
 
     return (
@@ -85,7 +86,7 @@ function forms({ setError }) {
             <div className='mt-[25%] sm:mt-[20%]'>
                 <form onSubmit={handleOnSubmit} >
                     <label className='flex gap-3'>
-                        <button onClick={handleComplete} className={form.isComplete === false ? 'cursor-pointer p-2 px-5 backdrop-blur-3xl text-green-700 text-[1.25rem] hidden sm:flex rounded-xl bg-transparent shadow-2xl bg-opacity-50 drop-shadow-lg' : 'p-2 px-5 cursor-pointer hidden sm:flex backdrop-blur-3xl text-red-700 text-[1.25rem] rounded-xl bg-transparent shadow-2xl bg-opacity-50 drop-shadow-lg'}><AiFillCheckCircle size={25} className='border rounded-full' /></button>
+                        <button onClick={handleComplete} className={form.isComplete === false ? 'cursor-pointer p-2 px-5 backdrop-blur-3xl text-red-700 text-[1.25rem] hidden sm:flex rounded-xl bg-transparent shadow-2xl bg-opacity-50 drop-shadow-lg' : 'p-2 px-5 cursor-pointer hidden sm:flex backdrop-blur-3xl text-green-700 text-[1.25rem] rounded-xl bg-transparent shadow-2xl bg-opacity-50 drop-shadow-lg'}><AiFillCheckCircle size={25} className='border rounded-full' /></button>
 
                         {/* <p className='text-[1.5rem] flex justify-center items-center h-auto text-white'>Title</p> */}
                         <input

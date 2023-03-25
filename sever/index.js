@@ -32,7 +32,7 @@ app.post('/api/create/form', FormInst.createForm);
 // delete form by id (http://localhost:8888/api/delete/:id)
 app.delete('/api/delete/:id', FormInst.deleteData);
 // patch complete (http://localhost:8888/api/update/isComplete)
-app.patch('/api/update/isComplete', setIsComplete);
+app.patch('/api/update/isComplete', FormInst.setIsComplete);
 // modify forms ()
 
 
