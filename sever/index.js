@@ -23,7 +23,7 @@ try {
 
 const FormInst = new Form(Model);
 
-//get all forms (http://localhost:8888/api/Forms)
+// get all forms (http://localhost:8888/api/Forms)
 app.get('/api/Forms', FormInst.getAllData);
 // get form by id (http://localhost:8888/api/Forms/:id)
 app.get('/api/Forms/:id', FormInst.findFormByID);
@@ -31,10 +31,9 @@ app.get('/api/Forms/:id', FormInst.findFormByID);
 app.post('/api/create/form', FormInst.createForm);
 // delete form by id (http://localhost:8888/api/delete/:id)
 app.delete('/api/delete/:id', FormInst.deleteData);
-//patch complete (http://localhost:8888/api/update/isComplete), modify forms
-app.patch('/api/update/isComplete', setIsComplete)
-// app.patch('/api/')
-
+// patch complete (http://localhost:8888/api/update/isComplete)
+app.patch('/api/update/isComplete', setIsComplete);
+// modify forms ()
 
 
 app.listen(PORT, console.log(`app running at http://localhost:${PORT}`));
