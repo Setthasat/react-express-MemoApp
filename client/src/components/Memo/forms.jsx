@@ -29,14 +29,12 @@ function forms({ setError }) {
 
     const handleOnSubmit = async (event) => {
         event.preventDefault();
-        console.log("hello");
+
         let { title, description, date } = form;
 
         if (!date) {
             date = GetDate();
-        }
-
-        if (!title, !description) {
+        } if (!title, !description) {
             setError(true);
         }
 
