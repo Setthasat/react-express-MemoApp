@@ -1,14 +1,9 @@
-import React, { useEffect, useState } from 'react';
-
 
 function ErrorPopUp({ setError }) {
-
-
 
     const handleClose = () => {
         setError(false);
     };
-
 
     return (
         <div className='fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm'>
