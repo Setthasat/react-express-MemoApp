@@ -16,7 +16,7 @@ class Form {
 
         const BaseResponseInst = new BaseResponse();
 
-        const { title, description, date } = req.body;
+        const { title, description, date, isComplete } = req.body;
 
         if (!title) {
             BaseResponseInst.setValue(400, "title is invalid", null);
@@ -27,12 +27,16 @@ class Form {
         } if (!date) {
             BaseResponseInst.setValue(400, "date is invalid", null);
             return res.json(BaseResponseInst.buildResponse()).status(400);
-        };
+        } if (!isComplete) {
+            BaseResponseInst.setValue(400, "isComplete is invalid", null);
+            return res.json(BaseResponseInst.buildResponse()).status(400);
+        }
 
         const item = new this.Model({
             title: title,
             description: description,
-            date: date
+            date: date,
+            isComplete : isComplete
         });
         try {
             const items = await this.Model.create(item);

@@ -15,7 +15,7 @@ const FormsSchema = new mongoose.Schema({
     },
     isComplete: {
         type: Boolean,
-        require: false
+        require: true
     }
 });
 
