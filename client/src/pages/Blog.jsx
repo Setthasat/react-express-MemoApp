@@ -18,8 +18,9 @@ function Blog() {
     useEffect(() => {
         fetch();
     }, []);
+
     return (
-        <div className='h-auto bg-gradient-to-r mt-[3rem] from-cyan-500 to-blue-500'>
+        <div className='h-auto bg-gradient-to-r from-cyan-500 to-blue-500 mt-[3rem]'>
             <Card apiData={apiData} />
         </div>
     );
