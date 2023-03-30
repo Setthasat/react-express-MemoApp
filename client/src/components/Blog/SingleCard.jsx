@@ -40,7 +40,7 @@ function SingleCard({ items }) {
                 <div className='flex justify-center items-center'>
                     <p className='flex justify-center items-center mb-2 px-16 py-1 text-[2rem] font-bold underline underline-offset-8'>{items.title}</p>
                 </div>
-                <p className='h-full overflow-ellipsis overflow-hidden text-white/80'>{items.description}</p>
+                <p className='h-[16.5rem] overflow-ellipsis overflow-hidden text-white/80'>{items.description}</p>
             </div>
         </div>
     );
