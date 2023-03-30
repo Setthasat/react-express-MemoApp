@@ -16,7 +16,7 @@ function SingleCard({ items }) {
                         <p className='-ml-[5rem]'>{items.date}</p>
                     </div>
                     <div className='flex justify-center -mr-[13rem] items-center'>
-                        <button onclick={changeIsComplete} className='pl-4'>{items.isComplete === false ? (
+                        <button onClick={changeIsComplete} className='pl-4'>{items.isComplete === false ? (
                             <AiFillCheckCircle color='red' />
                         ) : (
                             <AiFillCheckCircle color='green' />
@@ -29,7 +29,7 @@ function SingleCard({ items }) {
                 <div className='flex justify-center items-center'>
                     <p className='flex justify-center items-center mb-2 px-16 py-1 text-[2rem] font-bold underline underline-offset-8'>{items.title}</p>
                 </div>
-                <p className='h-full overflow-ellipsis overflow-hidden'>{items.description}</p>
+                <p className='h-full overflow-ellipsis overflow-hidden text-white/80'>{items.description}</p>
             </div>
         </div>
     );

@@ -11,13 +11,13 @@ function App() {
 
   return (
     <div className="bg-gradient-to-r from-cyan-500 to-blue-500 h-screen">
-      <Navbar />
-      <Routes>
-        <Route index element={<Home />} />
-        <Route path="blog" element={<Blog />} />
-        <Route path="forms" element={<MemoForms />} />
-        <Route plath="*" element={<Nopage />} />
-      </Routes>
+        <Navbar />
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="blog" element={<Blog />} />
+          <Route path="forms" element={<MemoForms />} />
+          <Route plath="*" element={<Nopage />} />
+        </Routes>
     </div>
   );
 }
