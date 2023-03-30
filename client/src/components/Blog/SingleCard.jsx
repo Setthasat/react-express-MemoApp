@@ -1,10 +1,21 @@
+import axios from 'axios';
 import React from 'react';
 import { AiFillCheckCircle } from 'react-icons/ai';
 
 function SingleCard({ items }) {
 
-    const changeIsComplete = () => {
-
+    const changeIsComplete = async (event) => {
+        event.preventDefault();
+        const data = {
+            _id: items._id
+        };
+        try {
+            await axios.patch('http://localhost:8888/api/update/isComplete', data);
+        } catch (err) {
+            console.log(err);
+            return;
+        }
+        window.location.reload();
     };
 
     return (
