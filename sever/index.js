@@ -33,7 +33,8 @@ app.post('/api/create/form', FormInst.createForm);
 app.delete('/api/delete/:id', FormInst.deleteData);
 // patch complete (http://localhost:8888/api/update/isComplete)
 app.patch('/api/update/isComplete', FormInst.setIsComplete);
-// modify forms ()
+// edit forms (http://localhost:8888/api/edit/:id)
+app.patch('/api/edit/:id', FormInst.editForms)
 
 
 app.listen(PORT, console.log(`app running at http://localhost:${PORT}`));

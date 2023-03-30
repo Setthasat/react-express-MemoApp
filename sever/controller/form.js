@@ -82,6 +82,10 @@ class Form {
         
     };
 
+    editForms = async (req, res) => {
+        
+    }
+
     deleteData = async (req, res) => {
         const BaseResponseInst = new BaseResponse();
         const { id } = req.params;

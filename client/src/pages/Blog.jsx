@@ -20,7 +20,7 @@ function Blog() {
     }, []);
 
     return (
-        <div className='h-auto bg-gradient-to-r from-cyan-500 to-blue-500 mt-[3rem]'>
+        <div className='h-auto bg-gradient-to-r from-cyan-500 to-blue-500 '>
             <Card apiData={apiData} />
         </div>
     );

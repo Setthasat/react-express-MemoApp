@@ -5,12 +5,12 @@ function SingleCard({ items }) {
 
     const changeIsComplete = () => {
 
-    }
+    };
 
     return (
-        <div className='bg-transparent backdrop-blur-3xl h-[30rem] m-[3rem] w-[30rem] mx-auto rounded-2xl font-sans shadow-2xl border-[2px] '>
+        <div className='bg-white/10 backdrop-blur-3xl h-[30rem] m-[3rem] w-[30rem] mx-auto rounded-2xl font-sans shadow-2xl border-[2px] border-white/40'>
             {/* HEADER (TITLE ZONE) */}
-            <div className='text-white text-[1.5rem] flex justify-center items-center  border-b-[1px]'>
+            <div className='text-white text-[1.5rem] flex justify-center items-center border-b-white/40  border-b-[1px]'>
                 <div className='flex justify-between items-center mt-3 mb-1 gap-4'>
                     <div className='flex justify-center items-center'>
                         <p className='-ml-[5rem]'>{items.date}</p>
@@ -25,9 +25,9 @@ function SingleCard({ items }) {
                 </div>
             </div>
             {/* BODY (DESCRIPTION ZONE)*/}
-            <div className='h-[23rem] m-[2rem] border text-white p-4 rounded-2xl' >
+            <div className='h-[23rem] m-[2rem] border border-white/40 text-white p-4 rounded-2xl' >
                 <div className='flex justify-center items-center'>
-                    <p className='flex justify-center items-center mb-2 px-16 py-1 text-[2rem] border rounded-2xl'>{items.title}</p>
+                    <p className='flex justify-center items-center mb-2 px-16 py-1 text-[2rem] font-bold underline underline-offset-8'>{items.title}</p>
                 </div>
                 <p className='h-full overflow-ellipsis overflow-hidden'>{items.description}</p>
             </div>
