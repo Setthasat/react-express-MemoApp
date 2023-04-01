@@ -24,14 +24,12 @@ function SingleCard({ items }) {
             <div className='text-white text-[1.5rem] flex justify-center items-center border-b-white/40  border-b-[1px]'>
                 <div className='flex justify-between items-center mt-3 mb-1 gap-4'>
                     <div className='flex justify-center items-center'>
-                        <p className='-ml-[5rem]'>{items.date}</p>
+                        <p className='-ml-[5rem]'>{items.date.slice(8, 11)} / {items.date.slice(5, 7)} / {items.date.slice(0, 4)}</p>
                     </div>
                     <div className='flex justify-center -mr-[13rem] items-center'>
-                        <button onClick={changeIsComplete} className='pl-4'>{items.isComplete === false ? (
-                            <AiFillCheckCircle color='red' />
-                        ) : (
-                            <AiFillCheckCircle color='green' />
-                        )}</button>
+                        <button onClick={changeIsComplete} className='pl-4'>
+                            <AiFillCheckCircle color={items.isComplete === false ? 'red' : 'green'} />
+                        </button>
                     </div>
                 </div>
             </div>
