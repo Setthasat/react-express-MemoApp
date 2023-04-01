@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 import { AiFillCheckCircle } from 'react-icons/ai';
 
 function SingleCard({ items }) {
@@ -15,6 +15,7 @@ function SingleCard({ items }) {
             console.log(err);
             return;
         }
+
         window.location.reload();
     };
 
@@ -27,7 +28,7 @@ function SingleCard({ items }) {
                         <p className='-ml-[5rem]'>{items.date.slice(8, 11)} / {items.date.slice(5, 7)} / {items.date.slice(0, 4)}</p>
                     </div>
                     <div className='flex justify-center -mr-[13rem] items-center'>
-                        <button onClick={changeIsComplete} className='pl-4'>
+                        <button onClick={changeIsComplete} className='rounded-full border border-white/60 w-auto'>
                             <AiFillCheckCircle color={items.isComplete === false ? 'red' : 'green'} />
                         </button>
                     </div>
