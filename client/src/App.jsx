@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import MemoForms from "./pages/MemoForms";
 import Nopage from "./pages/Nopage";
 import Blog from './pages/Blog';
+import SinglePage from './pages/SinglePage';
 // import useStore from "./store/store";
 
 function App() {
@@ -14,7 +15,10 @@ function App() {
       <Navbar />
       <Routes>
         <Route index element={<Home />} />
-        <Route path="blog" element={<Blog />} />
+        <Route path="blogs" element={<Blog />} />
+        <Route path="blog">
+          <Route path=":formId" element={<SinglePage />} />
+        </Route>
         <Route path="forms" element={<MemoForms />} />
         <Route plath="*" element={<Nopage />} />
       </Routes>

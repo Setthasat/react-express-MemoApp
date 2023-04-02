@@ -39,10 +39,15 @@ function SingleCard({ items }) {
                 <div className='flex justify-center items-center'>
                     <p className='flex justify-center items-center mb-2 px-16 py-1 text-[2rem] font-bold underline underline-offset-8'>{items.title}</p>
                 </div>
-                <p className='h-[16.5rem] overflow-ellipsis overflow-hidden text-white/80'>{items.description}</p>
+                <div className=''>
+                    <p className='h-[14.5rem] overflow-ellipsis overflow-hidden text-white/80'>{items.description}</p>
+                    <p className='font-light text-[1.5rem] flex justify-center items-center'><a href={`/blog/${items._id}`} className='underline-offset-8 underline'>Read more</a></p>
+                </div>
             </div>
         </div>
     );
 }
 
-export default SingleCard;
+
+
+export default SingleCard
