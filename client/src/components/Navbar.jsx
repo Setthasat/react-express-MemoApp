@@ -18,7 +18,7 @@ function Navbar() {
           <a href='/forms'>Forms</a>
         </div>
         <div className='flex justify-center items-center'>
-          <a href='/blog'>Blogs</a>
+          <a href='/blogs'>Blogs</a>
         </div>
       </div>
     </div>

@@ -36,7 +36,7 @@ class Form {
             title: title,
             description: description,
             date: date,
-            isComplete : isComplete
+            isComplete: isComplete
         });
         try {
             const items = await this.Model.create(item);
@@ -51,7 +51,7 @@ class Form {
     findFormByID = async (req, res) => {
         const BaseResponseInst = new BaseResponse();
         const { id } = req.params;
-        console.log(id);
+
         try {
             const form = await this.Model.findById({ _id: id });
             BaseResponseInst.setValue(200, "success", form);
@@ -70,7 +70,7 @@ class Form {
             BaseResponseInst.setValue(400, "invalid input", null);
             return res.json(BaseResponseInst.buildResponse()).status(400);
         }
-        try{
+        try {
             const form = await this.Model.findById(_id);
             form.isComplete = !form.isComplete;
             const NewForm = await form.save();
@@ -79,12 +79,12 @@ class Form {
             BaseResponseInst.setValue(400, "invalid input", null);
             return res.json(BaseResponseInst.buildResponse()).status(400);
         }
-        
+
     };
 
     editForms = async (req, res) => {
-        
-    }
+
+    };
 
     deleteData = async (req, res) => {
         const BaseResponseInst = new BaseResponse();
