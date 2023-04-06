@@ -25,9 +25,7 @@ function SinglePage() {
     }, []);
 
     return (
-        <>
-            <Body data={data} />
-        </>
+        <Body data={data} />
     );
 }
 

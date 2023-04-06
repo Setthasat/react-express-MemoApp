@@ -21,8 +21,8 @@ function Body({ data }) {
   };
 
   const dateTime = () => {
-    return <p className='-ml-[5rem]'>{data.date.slice(8, 11)} / {data.date.slice(5, 7)} / {data.date.slice(0, 4)}</p>
-  }
+    return <p className='-ml-[5rem]'>{data.date.slice(8, 11)} / {data.date.slice(5, 7)} / {data.date.slice(0, 4)}</p>;
+  };
 
   return (
     <div className='bg-white/10 backdrop-blur-3xl h-[30rem] m-[3rem] w-[30rem] mx-auto rounded-2xl font-sans shadow-2xl border-[2px] border-white/40'>
@@ -45,8 +45,8 @@ function Body({ data }) {
         <div className='flex justify-center items-center'>
           <p className='flex justify-center items-center mb-2 px-16 py-1 text-[2rem] font-bold underline underline-offset-8'>{data.title}</p>
         </div>
-        <div className=''>
-          <p className='h-[14.5rem] overflow-ellipsis overflow-hidden text-white/80'>{data.description}</p>
+        <div className='flex justify-start items-center '>
+          <p className='h-[16.5rem] overflow-x-auto text-white/80'>{data.description}</p>
 
         </div>
       </div>
