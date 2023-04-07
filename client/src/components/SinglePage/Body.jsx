@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { AiFillCheckCircle } from 'react-icons/ai';
 
 
 function Body({ data }) {
+
+  const [isComplete, setIsComplete] = useState(data.isComplete);
 
   const changeIsComplete = async (event) => {
     event.preventDefault();
@@ -16,9 +18,12 @@ function Body({ data }) {
       console.log(err);
       return;
     }
-
-    window.location.reload();
+    setIsComplete((prev) => !prev);
+    console.log(isComplete, data.isComplete);
+    console.log(data);
+    // window.location.reload();
   };
+
 
   const dateTime = () => {
     return <p className='-ml-[5rem]'>{data.date.slice(8, 11)} / {data.date.slice(5, 7)} / {data.date.slice(0, 4)}</p>;

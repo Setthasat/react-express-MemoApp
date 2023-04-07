@@ -16,6 +16,20 @@ function forms({ setError }) {
         isComplete: false
     });
 
+    const [date, setDate] = useState({
+        day: "",
+        month: '',
+        year: ""
+    });
+
+    const onChangeDateInput = (event) => {
+        const { name, value } = event.target;
+        setDate(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
     //moment().format("YYYY-MM-DD")
 
     const onChangeInput = (event) => {
@@ -78,6 +92,12 @@ function forms({ setError }) {
         console.log(!form.isComplete);
     };
 
+    const handleValidateInput = (event) => {
+        if (!/[0-9]/.test(event.key)) {
+            event.preventDefault();
+        }
+    };
+
     return (
         <div className='flex justify-center items-center bg-gradient-to-r from-cyan-500 to-blue-500 font-sans'>
             <div className='mt-[25%] sm:mt-[20%]'>
@@ -109,9 +129,9 @@ function forms({ setError }) {
                     <label className="relative flex justify-between items-center">
                         <button onClick={handleComplete} className={form.isComplete === false ? 'p-2 px-5 backdrop-blur-3xl text-green-700 text-[1.25rem] flex sm:hidden rounded-xl bg-transparent shadow-2xl bg-opacity-50 cursor-pointer drop-shadow-lg' : 'p-2 px-5 cursor-pointer backdrop-blur-3xl text-red-700 text-[1.25rem] flex sm:hidden rounded-xl bg-transparent shadow-2xl bg-opacity-50 drop-shadow-lg'}><AiFillCheckCircle size={25} className='border rounded-full' /></button>
                         <div className='flex justify-center items-center '>
-                            <input type='text' placeholder='date'  className='mx-1 w-[6rem] backdrop-blur-3xl mt-2 focus:outline-none border py-3 px-[24px] border-white/40 placeholder:text-white/70 rounded-xl bg-transparent' /><p className='text-white mx-1 text-[2rem] font-thin'>/</p>
-                            <input type='text' placeholder='month' className='mx-1 w-[8rem] backdrop-blur-3xl mt-2 focus:outline-none border py-3 px-[24px]   border-white/40   placeholder:text-white/70 rounded-xl bg-transparent' /><p className='text-white mx-1 text-[2rem] font-thin'>/</p>
-                            <input type='text' placeholder='year'  className='mx-1 w-[8rem] backdrop-blur-3xl mt-2 focus:outline-none border py-3 px-[24px] border-white/40 placeholder:text-white/70 rounded-xl bg-transparent' />
+                            <input maxLength={2} name="day" value={date.day} type='text' onKeyPress={handleValidateInput} onChange={onChangeDateInput} placeholder='date' className='mx-1 w-[6rem] text-white backdrop-blur-3xl mt-2 focus:outline-none border py-3 px-[24px] border-white/40 placeholder:text-white/70 rounded-xl bg-transparent' /><p className='text-white mx-1 text-[2rem] font-thin'>/</p>
+                            <input maxLength={2} name="month" value={date.month} type='text' onKeyPress={handleValidateInput} onChange={onChangeDateInput} placeholder='month' className='mx-1 w-[8rem] text-white backdrop-blur-3xl mt-2 focus:outline-none border py-3 px-[24px] border-white/40 placeholder:text-white/70 rounded-xl bg-transparent' /><p className='text-white mx-1 text-[2rem] font-thin'>/</p>
+                            <input maxLength={4} name="year" value={date.year} type='text' onKeyPress={handleValidateInput} onChange={onChangeDateInput} placeholder='year' className='mx-1 w-[8rem] text-white backdrop-blur-3xl mt-2 focus:outline-none border py-3 px-[24px] border-white/40 placeholder:text-white/70 rounded-xl bg-transparent' />
                         </div>
                         {/* <input
                             type='date'
