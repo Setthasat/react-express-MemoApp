@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import moment from 'moment';
 import { GetDate } from '../../utils/index';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import axios from 'axios';
@@ -22,13 +23,7 @@ function forms({ setError }) {
         year: ""
     });
 
-    const onChangeDateInput = (event) => {
-        const { name, value } = event.target;
-        setDate(prev => ({
-            ...prev,
-            [name]: value
-        }));
-    };
+
 
     //moment().format("YYYY-MM-DD")
 
@@ -93,9 +88,71 @@ function forms({ setError }) {
     };
 
     const handleValidateInput = (event) => {
+        const { name, value } = event.target;
+        let { day, month, year } = date;
         if (!/[0-9]/.test(event.key)) {
             event.preventDefault();
         }
+        if (name === "day") {
+            let newDay = parseInt(day);
+            console.log(`day : ${newDay} : ${typeof newDay}`);
+            if(newDay > 30 && (month === 4 || month === 6 || month === 9 || month === 11)){
+                setDate(prev => ({
+                    ...prev,
+                    day: 30
+                }));
+            } if (newDay > 31 && (month === 1 || month === 3 || month === 5 || month === 7 || month === 8 || month === 10 || month === 12)){
+                setDate(prev => ({
+                    ...prev,
+                    day: 31
+                }));
+            } if (newDay > 29 && year % 4 === 0){
+                setDate(prev => ({
+                    ...prev,
+                    day: 29
+                }));
+            } if (newDay > 28 && year % 4 !== 0) {
+                setDate(prev => ({
+                    ...prev,
+                    day: 28
+                }));
+            }
+        }
+        if (name === "month") {
+            let newMonth = parseInt(month);
+            console.log(`day : ${newMonth} : ${typeof newMonth}`);
+            if (month > 12) {
+                setDate(prev => ({
+                    ...prev,
+                    month: 12
+                }));
+            }
+        }
+        if (name === "year") {
+            let newYear = parseInt(year);
+            let nowYear = moment().format("YYYY");
+            console.log(`day : ${newYear} : ${typeof newYear}`);
+            console.log(nowYear);
+            if (newYear > nowYear) {
+                setDate(prev => ({
+                    ...prev,
+                    year: nowYear
+                }));
+            }
+        }
+
+        console.log(date);
+    };
+
+    const onChangeDateInput = (event) => {
+        const { name, value } = event.target;
+        let { day, month, year } = date;
+
+        setDate(prev => ({
+            ...prev,
+            [name]: value
+        }));
+
     };
 
     return (
