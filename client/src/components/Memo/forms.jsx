@@ -9,6 +9,8 @@ import axios from 'axios';
 function forms({ setError }) {
 
 
+
+
     const [form, setForm] = useState({
         id: uuidv4(),
         title: "",
@@ -17,14 +19,17 @@ function forms({ setError }) {
         isComplete: false
     });
 
-    const [date, setDate] = useState({
+    const [dateInput, setDateInput] = useState({
         day: "",
         month: '',
         year: ""
     });
 
+    const [allDate, setAllDate] = useState();
 
-
+    useEffect(() => {
+        console.log(dateInput);
+    }, [dateInput]);
     //moment().format("YYYY-MM-DD")
 
     const onChangeInput = (event) => {
@@ -39,12 +44,16 @@ function forms({ setError }) {
         event.preventDefault();
 
         let { title, description, date } = form;
+        let { day, month, year } = dateInput;
 
         if (!date) {
             date = GetDate();
         } if (!title, !description) {
             setError(true);
         }
+
+
+
 
         console.log(form);
 
@@ -89,71 +98,68 @@ function forms({ setError }) {
 
     const handleValidateInput = (event) => {
         const { name, value } = event.target;
-        let { day, month, year } = date;
+        let { day, month, year } = dateInput;
         if (!/[0-9]/.test(event.key)) {
             event.preventDefault();
         }
-        if (name === "day") {
-            let newDay = parseInt(day);
-            console.log(`day : ${newDay} : ${typeof newDay}`);
-            if(newDay > 30 && (month === 4 || month === 6 || month === 9 || month === 11)){
-                setDate(prev => ({
+        if (name === "year") {
+            let newYear = parseInt(year);
+            let nowYear = moment().format("YYYY");
+            if (newYear > nowYear) {
+                setDateInput(prev => ({
                     ...prev,
-                    day: 30
-                }));
-            } if (newDay > 31 && (month === 1 || month === 3 || month === 5 || month === 7 || month === 8 || month === 10 || month === 12)){
-                setDate(prev => ({
-                    ...prev,
-                    day: 31
-                }));
-            } if (newDay > 29 && year % 4 === 0){
-                setDate(prev => ({
-                    ...prev,
-                    day: 29
-                }));
-            } if (newDay > 28 && year % 4 !== 0) {
-                setDate(prev => ({
-                    ...prev,
-                    day: 28
+                    year: parseInt(nowYear) 
                 }));
             }
         }
+
         if (name === "month") {
             let newMonth = parseInt(month);
-            console.log(`day : ${newMonth} : ${typeof newMonth}`);
             if (month > 12) {
-                setDate(prev => ({
+                setDateInput(prev => ({
                     ...prev,
                     month: 12
                 }));
             }
         }
-        if (name === "year") {
-            let newYear = parseInt(year);
-            let nowYear = moment().format("YYYY");
-            console.log(`day : ${newYear} : ${typeof newYear}`);
-            console.log(nowYear);
-            if (newYear > nowYear) {
-                setDate(prev => ({
+
+        if (name === "day") {
+            let newDay = parseInt(day);
+            if (newDay > 30 && (month === 4 || month === 6 || month === 9 || month === 11)) {
+                setDateInput(prev => ({
                     ...prev,
-                    year: nowYear
+                    day: 30
+                }));
+            } if (newDay > 31 && (month === 1 || month === 3 || month === 5 || month === 7 || month === 8 || month === 10 || month === 12)) {
+                setDateInput(prev => ({
+                    ...prev,
+                    day: 31
+                }));
+            } if (newDay > 29 && month === 2 && year % 4 === 0) {
+                setDateInput(prev => ({
+                    ...prev,
+                    day: 29
+                }));
+            } if (newDay > 28 && month === 2 && year % 4 !== 0) {
+                setDateInput(prev => ({
+                    ...prev,
+                    day: 28
                 }));
             }
         }
-
-        console.log(date);
     };
 
     const onChangeDateInput = (event) => {
         const { name, value } = event.target;
-        let { day, month, year } = date;
 
-        setDate(prev => ({
+        setDateInput(prev => ({
             ...prev,
             [name]: value
         }));
 
     };
+
+
 
     return (
         <div className='flex justify-center items-center bg-gradient-to-r from-cyan-500 to-blue-500 font-sans'>
@@ -170,7 +176,7 @@ function forms({ setError }) {
                             value={form.title}
                             onChange={onChangeInput}
                             placeholder='title . . .'
-                            className='px-2 h-[3rem] border-[2px] border-white/20 w-[22.775rem]  mx-[10rem] sm:mx-0 sm:w-[34rem] focus:outline-none bg-transparent placeholder:opacity-70 text-white placeholder:text-gray-50 shadow-2xl backdrop-blur-3xl rounded-xl '
+                            className='px-2 h-[3rem] border-[2px] border-white/20 w-[22.775rem]  mx-[10rem] sm:mx-0 sm:w-full focus:outline-none bg-transparent placeholder:opacity-70 text-white placeholder:text-gray-50 shadow-2xl backdrop-blur-3xl rounded-xl '
                         />
                     </label>
                     <textarea
@@ -186,9 +192,9 @@ function forms({ setError }) {
                     <label className="relative flex justify-between items-center">
                         <button onClick={handleComplete} className={form.isComplete === false ? 'p-2 px-5 backdrop-blur-3xl text-green-700 text-[1.25rem] flex sm:hidden rounded-xl bg-transparent shadow-2xl bg-opacity-50 cursor-pointer drop-shadow-lg' : 'p-2 px-5 cursor-pointer backdrop-blur-3xl text-red-700 text-[1.25rem] flex sm:hidden rounded-xl bg-transparent shadow-2xl bg-opacity-50 drop-shadow-lg'}><AiFillCheckCircle size={25} className='border rounded-full' /></button>
                         <div className='flex justify-center items-center '>
-                            <input maxLength={2} name="day" value={date.day} type='text' onKeyPress={handleValidateInput} onChange={onChangeDateInput} placeholder='date' className='mx-1 w-[6rem] text-white backdrop-blur-3xl mt-2 focus:outline-none border py-3 px-[24px] border-white/40 placeholder:text-white/70 rounded-xl bg-transparent' /><p className='text-white mx-1 text-[2rem] font-thin'>/</p>
-                            <input maxLength={2} name="month" value={date.month} type='text' onKeyPress={handleValidateInput} onChange={onChangeDateInput} placeholder='month' className='mx-1 w-[8rem] text-white backdrop-blur-3xl mt-2 focus:outline-none border py-3 px-[24px] border-white/40 placeholder:text-white/70 rounded-xl bg-transparent' /><p className='text-white mx-1 text-[2rem] font-thin'>/</p>
-                            <input maxLength={4} name="year" value={date.year} type='text' onKeyPress={handleValidateInput} onChange={onChangeDateInput} placeholder='year' className='mx-1 w-[8rem] text-white backdrop-blur-3xl mt-2 focus:outline-none border py-3 px-[24px] border-white/40 placeholder:text-white/70 rounded-xl bg-transparent' />
+                            <input maxLength={4} name="year" value={dateInput.year} type='text' onKeyPress={handleValidateInput} onChange={onChangeDateInput} placeholder='year' className='mx-1 w-[8rem] text-white backdrop-blur-3xl mt-2 focus:outline-none border py-3 px-[24px] border-white/40 placeholder:text-white/70 rounded-xl bg-transparent' /><p className='text-white mx-1 text-[2rem] font-thin'>/</p>
+                            <input maxLength={2} name="month" value={dateInput.month} type='text' onKeyPress={handleValidateInput} onChange={onChangeDateInput} placeholder='month' className='mx-1 w-[8rem] text-white backdrop-blur-3xl mt-2 focus:outline-none border py-3 px-[24px] border-white/40 placeholder:text-white/70 rounded-xl bg-transparent' /><p className='text-white mx-1 text-[2rem] font-thin'>/</p>
+                            <input maxLength={2} name="day" value={dateInput.day} type='text' onKeyPress={handleValidateInput} onChange={onChangeDateInput} placeholder='date' className='mx-1 w-[6rem] text-white backdrop-blur-3xl mt-2 focus:outline-none border py-3 px-[24px] border-white/40 placeholder:text-white/70 rounded-xl bg-transparent' />
                         </div>
                         {/* <input
                             type='date'
