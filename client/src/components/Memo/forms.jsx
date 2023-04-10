@@ -46,15 +46,20 @@ function forms({ setError }) {
         let { title, description, date } = form;
         let { day, month, year } = dateInput;
 
-        if (!date) {
-            date = GetDate();
-        } if (!title, !description) {
+        let finalDate = year.concat('-').concat(month).concat('-').concat(day)
+        
+        setForm((prev) => ({
+            ...prev,
+            date: finalDate || GetDate()
+        }))
+
+         if (!title, !description) {
             setError(true);
         }
 
 
 
-
+      
         console.log(form);
 
         const data = {
@@ -102,51 +107,51 @@ function forms({ setError }) {
         if (!/[0-9]/.test(event.key)) {
             event.preventDefault();
         }
-        if (name === "year") {
-            let newYear = parseInt(year);
-            let nowYear = moment().format("YYYY");
-            if (newYear > nowYear) {
-                setDateInput(prev => ({
-                    ...prev,
-                    year: parseInt(nowYear) 
-                }));
-            }
-        }
+        // if (name === "year") {
+        //     let newYear = parseInt(year);
+        //     let nowYear = moment().format("YYYY");
+        //     if (newYear > nowYear) {
+        //         setDateInput(prev => ({
+        //             ...prev,
+        //             year: parseInt(nowYear) 
+        //         }));
+        //     }
+        // }
 
-        if (name === "month") {
-            let newMonth = parseInt(month);
-            if (month > 12) {
-                setDateInput(prev => ({
-                    ...prev,
-                    month: 12
-                }));
-            }
-        }
+        // if (name === "month") {
+        //     let newMonth = parseInt(month);
+        //     if (month > 12) {
+        //         setDateInput(prev => ({
+        //             ...prev,
+        //             month: 12
+        //         }));
+        //     }
+        // }
 
-        if (name === "day") {
-            let newDay = parseInt(day);
-            if (newDay > 30 && (month === 4 || month === 6 || month === 9 || month === 11)) {
-                setDateInput(prev => ({
-                    ...prev,
-                    day: 30
-                }));
-            } if (newDay > 31 && (month === 1 || month === 3 || month === 5 || month === 7 || month === 8 || month === 10 || month === 12)) {
-                setDateInput(prev => ({
-                    ...prev,
-                    day: 31
-                }));
-            } if (newDay > 29 && month === 2 && year % 4 === 0) {
-                setDateInput(prev => ({
-                    ...prev,
-                    day: 29
-                }));
-            } if (newDay > 28 && month === 2 && year % 4 !== 0) {
-                setDateInput(prev => ({
-                    ...prev,
-                    day: 28
-                }));
-            }
-        }
+        // if (name === "day") {
+        //     let newDay = parseInt(day);
+        //     if (newDay > 30 && (month === 4 || month === 6 || month === 9 || month === 11)) {
+        //         setDateInput(prev => ({
+        //             ...prev,
+        //             day: 30
+        //         }));
+        //     } if (newDay > 31 && (month === 1 || month === 3 || month === 5 || month === 7 || month === 8 || month === 10 || month === 12)) {
+        //         setDateInput(prev => ({
+        //             ...prev,
+        //             day: 31
+        //         }));
+        //     } if (newDay > 29 && month === 2 && year % 4 === 0) {
+        //         setDateInput(prev => ({
+        //             ...prev,
+        //             day: 29
+        //         }));
+        //     } if (newDay > 28 && month === 2 && year % 4 !== 0) {
+        //         setDateInput(prev => ({
+        //             ...prev,
+        //             day: 28
+        //         }));
+        //     }
+        // }
     };
 
     const onChangeDateInput = (event) => {
