@@ -17,6 +17,7 @@ function Blog() {
 
     useEffect(() => {
         fetch();
+        console.log(apiData);
     }, []);
 
     return (
