@@ -5,11 +5,12 @@ import moment from 'moment';
 import { GetDate } from '../../utils/index';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import axios from 'axios';
+import DatePicker from "react-datepicker";
 
 function forms({ setError }) {
 
 
-
+    const [startDate, setStartDate] = useState(new Date());
 
     const [form, setForm] = useState({
         id: uuidv4(),
@@ -44,22 +45,19 @@ function forms({ setError }) {
         event.preventDefault();
 
         let { title, description, date } = form;
-        let { day, month, year } = dateInput;
+        // let { day, month, year } = dateInput;
 
-        let finalDate = year.concat('-').concat(month).concat('-').concat(day)
-        
-        setForm((prev) => ({
-            ...prev,
-            date: finalDate || GetDate()
-        }))
+        // let finalDate = year.concat('-').concat(month).concat('-').concat(day)
 
-         if (!title, !description) {
+        if (!date) {
+            date = GetDate();
+        } if (!title, !description) {
             setError(true);
         }
 
 
 
-      
+
         console.log(form);
 
         const data = {
@@ -101,68 +99,68 @@ function forms({ setError }) {
         console.log(!form.isComplete);
     };
 
-    const handleValidateInput = (event) => {
-        const { name, value } = event.target;
-        let { day, month, year } = dateInput;
-        if (!/[0-9]/.test(event.key)) {
-            event.preventDefault();
-        }
-        // if (name === "year") {
-        //     let newYear = parseInt(year);
-        //     let nowYear = moment().format("YYYY");
-        //     if (newYear > nowYear) {
-        //         setDateInput(prev => ({
-        //             ...prev,
-        //             year: parseInt(nowYear) 
-        //         }));
-        //     }
-        // }
+    // const handleValidateInput = (event) => {
+    //     const { name, value } = event.target;
+    //     let { day, month, year } = dateInput;
+    //     if (!/[0-9]/.test(event.key)) {
+    //         event.preventDefault();
+    //     }
+    // if (name === "year") {
+    //     let newYear = parseInt(year);
+    //     let nowYear = moment().format("YYYY");
+    //     if (newYear > nowYear) {
+    //         setDateInput(prev => ({
+    //             ...prev,
+    //             year: parseInt(nowYear) 
+    //         }));
+    //     }
+    // }
 
-        // if (name === "month") {
-        //     let newMonth = parseInt(month);
-        //     if (month > 12) {
-        //         setDateInput(prev => ({
-        //             ...prev,
-        //             month: 12
-        //         }));
-        //     }
-        // }
+    // if (name === "month") {
+    //     let newMonth = parseInt(month);
+    //     if (month > 12) {
+    //         setDateInput(prev => ({
+    //             ...prev,
+    //             month: 12
+    //         }));
+    //     }
+    // }
 
-        // if (name === "day") {
-        //     let newDay = parseInt(day);
-        //     if (newDay > 30 && (month === 4 || month === 6 || month === 9 || month === 11)) {
-        //         setDateInput(prev => ({
-        //             ...prev,
-        //             day: 30
-        //         }));
-        //     } if (newDay > 31 && (month === 1 || month === 3 || month === 5 || month === 7 || month === 8 || month === 10 || month === 12)) {
-        //         setDateInput(prev => ({
-        //             ...prev,
-        //             day: 31
-        //         }));
-        //     } if (newDay > 29 && month === 2 && year % 4 === 0) {
-        //         setDateInput(prev => ({
-        //             ...prev,
-        //             day: 29
-        //         }));
-        //     } if (newDay > 28 && month === 2 && year % 4 !== 0) {
-        //         setDateInput(prev => ({
-        //             ...prev,
-        //             day: 28
-        //         }));
-        //     }
-        // }
-    };
+    // if (name === "day") {
+    //     let newDay = parseInt(day);
+    //     if (newDay > 30 && (month === 4 || month === 6 || month === 9 || month === 11)) {
+    //         setDateInput(prev => ({
+    //             ...prev,
+    //             day: 30
+    //         }));
+    //     } if (newDay > 31 && (month === 1 || month === 3 || month === 5 || month === 7 || month === 8 || month === 10 || month === 12)) {
+    //         setDateInput(prev => ({
+    //             ...prev,
+    //             day: 31
+    //         }));
+    //     } if (newDay > 29 && month === 2 && year % 4 === 0) {
+    //         setDateInput(prev => ({
+    //             ...prev,
+    //             day: 29
+    //         }));
+    //     } if (newDay > 28 && month === 2 && year % 4 !== 0) {
+    //         setDateInput(prev => ({
+    //             ...prev,
+    //             day: 28
+    //         }));
+    //     }
+    // }
+    // };
 
-    const onChangeDateInput = (event) => {
-        const { name, value } = event.target;
+    // const onChangeDateInput = (event) => {
+    //     const { name, value } = event.target;
 
-        setDateInput(prev => ({
-            ...prev,
-            [name]: value
-        }));
+    //     setDateInput(prev => ({
+    //         ...prev,
+    //         [name]: value
+    //     }));
 
-    };
+    // };
 
 
 
@@ -196,11 +194,12 @@ function forms({ setError }) {
                     />
                     <label className="relative flex justify-between items-center">
                         <button onClick={handleComplete} className={form.isComplete === false ? 'p-2 px-5 backdrop-blur-3xl text-green-700 text-[1.25rem] flex sm:hidden rounded-xl bg-transparent shadow-2xl bg-opacity-50 cursor-pointer drop-shadow-lg' : 'p-2 px-5 cursor-pointer backdrop-blur-3xl text-red-700 text-[1.25rem] flex sm:hidden rounded-xl bg-transparent shadow-2xl bg-opacity-50 drop-shadow-lg'}><AiFillCheckCircle size={25} className='border rounded-full' /></button>
-                        <div className='flex justify-center items-center '>
+                        <DatePicker onChange={onChangeInput} selected={startDate} value={form.date} className='mr-[10rem] text-white w-full focus:outline-none backdrop-blur-3xl p-3 mt-2 rounded-2xl border-[2px] border-white/20 bg-transparent shadow-2xl' />
+                        {/* <div className='flex justify-center items-center '>
                             <input maxLength={4} name="year" value={dateInput.year} type='text' onKeyPress={handleValidateInput} onChange={onChangeDateInput} placeholder='year' className='mx-1 w-[8rem] text-white backdrop-blur-3xl mt-2 focus:outline-none border py-3 px-[24px] border-white/40 placeholder:text-white/70 rounded-xl bg-transparent' /><p className='text-white mx-1 text-[2rem] font-thin'>/</p>
                             <input maxLength={2} name="month" value={dateInput.month} type='text' onKeyPress={handleValidateInput} onChange={onChangeDateInput} placeholder='month' className='mx-1 w-[8rem] text-white backdrop-blur-3xl mt-2 focus:outline-none border py-3 px-[24px] border-white/40 placeholder:text-white/70 rounded-xl bg-transparent' /><p className='text-white mx-1 text-[2rem] font-thin'>/</p>
                             <input maxLength={2} name="day" value={dateInput.day} type='text' onKeyPress={handleValidateInput} onChange={onChangeDateInput} placeholder='date' className='mx-1 w-[6rem] text-white backdrop-blur-3xl mt-2 focus:outline-none border py-3 px-[24px] border-white/40 placeholder:text-white/70 rounded-xl bg-transparent' />
-                        </div>
+                        </div> */}
                         {/* <input
                             type='date'
                             name='date'
