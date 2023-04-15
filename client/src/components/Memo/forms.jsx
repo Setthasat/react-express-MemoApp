@@ -9,7 +9,6 @@ import DatePicker from "react-datepicker";
 
 function forms({ setError }) {
 
-
     const [startDate, setStartDate] = useState(new Date());
 
     const [form, setForm] = useState({
@@ -28,9 +27,7 @@ function forms({ setError }) {
 
     const [allDate, setAllDate] = useState();
 
-    useEffect(() => {
-        console.log(dateInput);
-    }, [dateInput]);
+    
     //moment().format("YYYY-MM-DD")
 
     const onChangeInput = (event) => {
@@ -194,13 +191,18 @@ function forms({ setError }) {
                     />
                     <label className="relative flex justify-between items-center">
                         <button onClick={handleComplete} className={form.isComplete === false ? 'p-2 px-5 backdrop-blur-3xl text-green-700 text-[1.25rem] flex sm:hidden rounded-xl bg-transparent shadow-2xl bg-opacity-50 cursor-pointer drop-shadow-lg' : 'p-2 px-5 cursor-pointer backdrop-blur-3xl text-red-700 text-[1.25rem] flex sm:hidden rounded-xl bg-transparent shadow-2xl bg-opacity-50 drop-shadow-lg'}><AiFillCheckCircle size={25} className='border rounded-full' /></button>
-                        <DatePicker onChange={onChangeInput} selected={startDate} value={form.date} className='mr-[10rem] text-white w-full focus:outline-none backdrop-blur-3xl p-3 mt-2 rounded-2xl border-[2px] border-white/20 bg-transparent shadow-2xl' />
+                        {/* <DatePicker 
+                        onChange={onChangeInput} 
+                        selected={startDate} 
+                        value={form.date} c
+                        lassName='mr-[10rem] text-white w-full focus:outline-none backdrop-blur-3xl p-3 mt-2 rounded-2xl border-[2px] border-white/20 bg-transparent shadow-2xl' /> */}
                         {/* <div className='flex justify-center items-center '>
                             <input maxLength={4} name="year" value={dateInput.year} type='text' onKeyPress={handleValidateInput} onChange={onChangeDateInput} placeholder='year' className='mx-1 w-[8rem] text-white backdrop-blur-3xl mt-2 focus:outline-none border py-3 px-[24px] border-white/40 placeholder:text-white/70 rounded-xl bg-transparent' /><p className='text-white mx-1 text-[2rem] font-thin'>/</p>
                             <input maxLength={2} name="month" value={dateInput.month} type='text' onKeyPress={handleValidateInput} onChange={onChangeDateInput} placeholder='month' className='mx-1 w-[8rem] text-white backdrop-blur-3xl mt-2 focus:outline-none border py-3 px-[24px] border-white/40 placeholder:text-white/70 rounded-xl bg-transparent' /><p className='text-white mx-1 text-[2rem] font-thin'>/</p>
                             <input maxLength={2} name="day" value={dateInput.day} type='text' onKeyPress={handleValidateInput} onChange={onChangeDateInput} placeholder='date' className='mx-1 w-[6rem] text-white backdrop-blur-3xl mt-2 focus:outline-none border py-3 px-[24px] border-white/40 placeholder:text-white/70 rounded-xl bg-transparent' />
                         </div> */}
-                        {/* <input
+                        <input
+                            
                             type='date'
                             name='date'
                             placeholder='date/month/year'
@@ -212,7 +214,7 @@ function forms({ setError }) {
                                 MozAppearance: 'none',
                                 appearance: 'none',
                             }}
-                        /> */}
+                        />
                         <button type='submit' className='text-white border-[2px] border-white/20 bg-transparent shadow-2xl ml-[0.5rem] backdrop-blur-3xl mt-2 p-3 px-[2rem] sm:px-[5.25rem] rounded-xl'>Submit</button>
                     </label>
                 </form>
