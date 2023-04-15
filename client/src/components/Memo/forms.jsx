@@ -6,6 +6,7 @@ import { GetDate } from '../../utils/index';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import axios from 'axios';
 import DatePicker from "react-datepicker";
+import './ forms.css'
 
 function forms({ setError }) {
 
@@ -202,7 +203,7 @@ function forms({ setError }) {
                             <input maxLength={2} name="day" value={dateInput.day} type='text' onKeyPress={handleValidateInput} onChange={onChangeDateInput} placeholder='date' className='mx-1 w-[6rem] text-white backdrop-blur-3xl mt-2 focus:outline-none border py-3 px-[24px] border-white/40 placeholder:text-white/70 rounded-xl bg-transparent' />
                         </div> */}
                         <input
-                            
+                            class='date'
                             type='date'
                             name='date'
                             placeholder='date/month/year'
