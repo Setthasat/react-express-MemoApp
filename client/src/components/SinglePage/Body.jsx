@@ -5,7 +5,6 @@ import { AiFillCheckCircle } from 'react-icons/ai';
 
 function Body({ data }) {
 
-  console.log(data);
   const [isComplete, setIsComplete] = useState(data.isComplete);
 
   const changeIsComplete = async (event) => {
